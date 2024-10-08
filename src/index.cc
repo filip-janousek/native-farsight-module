@@ -102,7 +102,11 @@ Napi::Object setOffsets(const Napi::CallbackInfo &info)
     Offsets::ObjTotalGold = offsets.Get("objTotalGold").As<Napi::Number>().Int32Value();
     Offsets::ObjDisplayName = offsets.Get("objDisplayName").As<Napi::Number>().Int32Value();
     Offsets::ObjDisplayNameLength = offsets.Get("objDisplayNameLength").As<Napi::Number>().Int32Value();
-
+    Offsets::TimersBase = offsets.Get("timersBase").As<Napi::Number>().Int32Value();
+    Offsets::TimerGrubs = offsets.Get("timerGrubs").As<Napi::Number>().Int32Value();
+    Offsets::TimerHerlad = offsets.Get("timerHerlad").As<Napi::Number>().Int32Value();
+    Offsets::TimerBaron = offsets.Get("timerBaron").As<Napi::Number>().Int32Value();
+    Offsets::TimerDrake = offsets.Get("timerDrake").As<Napi::Number>().Int32Value();
 
    res.Set("success", Napi::Boolean::New(env, true));
 

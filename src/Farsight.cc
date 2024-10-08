@@ -288,8 +288,8 @@ void Farsight::CreateSnapshot(Snapshot &snapshot, Napi::Env env)
 
     uintptr_t TimersBase2;
     uintptr_t TimersBase;
-    
-    ReadMemory(hProcess, baseAddress +  0x19CC890, TimersBase);
+ 
+    ReadMemory(hProcess, baseAddress +  Offsets::TimersBase, TimersBase);
 
 
     ReadMemory(hProcess, TimersBase +  0x40, TimersBase2);
@@ -305,10 +305,10 @@ void Farsight::CreateSnapshot(Snapshot &snapshot, Napi::Env env)
     uintptr_t HeraldBase;
     uintptr_t BaronBase;
     uintptr_t DrakeBase;
-    ReadMemory(hProcess, TimersBase +  0x330, GubsBase);
-    ReadMemory(hProcess, TimersBase +  0x30, HeraldBase);
-    ReadMemory(hProcess, TimersBase +  0x0, BaronBase);
-    ReadMemory(hProcess, TimersBase +  0x270, DrakeBase);
+    ReadMemory(hProcess, TimersBase +  Offsets::TimerGrubs , GubsBase);
+    ReadMemory(hProcess, TimersBase +  Offsets::TimerHerlad, HeraldBase);
+    ReadMemory(hProcess, TimersBase +  Offsets::TimerBaron , BaronBase);
+    ReadMemory(hProcess, TimersBase +  Offsets::TimerDrake, DrakeBase);
 
 
     std::cout << TimersBase << std::endl; 

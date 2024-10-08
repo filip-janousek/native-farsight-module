@@ -34,5 +34,11 @@
     "heroList": "0x19CC848",
     "minionList": "0x19CF8A8",
     "turretList": "0x19CEA68",
-    "inhibitorList": "0x19D6998"
+    "inhibitorList": "0x19D6998",
+
+    "timersBase": "0x19CC890",
+    "timerGrubs": "0x330",
+    "timerHerlad": "0x30",
+    "timerBaron": "0x0",
+    "timerDrake": "0x270"
 }
