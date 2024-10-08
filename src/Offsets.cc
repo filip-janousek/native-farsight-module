@@ -32,3 +32,9 @@ int Offsets::ObjLvl = 0x0;
 int Offsets::ObjExperience = 0x0;
 int Offsets::ObjCurrentGold = 0x0;
 int Offsets::ObjTotalGold = 0x0;
+
+int Offsets::TimersBase = 0x0;
+int Offsets::TimerGrubs = 0x0;
+int Offsets::TimerHerlad = 0x0;
+int Offsets::TimerBaron = 0x0;
+int Offsets::TimerDrake = 0x0;

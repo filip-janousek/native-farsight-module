@@ -32,5 +32,12 @@ class Offsets {
         static int MinionList;
         static int TurretList;
         static int InhibitorList;
+
+        static int TimersBase;
+
+        static int TimerGrubs;
+        static int TimerHerlad;
+        static int TimerBaron;
+        static int TimerDrake;
         
 };

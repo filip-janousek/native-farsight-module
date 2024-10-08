@@ -10,6 +10,8 @@
 #include "windows.h"
 #include "psapi.h"
 #include "Utils.h"
+
+#include <iostream>
 std::set<std::string> Farsight::championNames{};
 
 Farsight::Farsight()
@@ -276,11 +278,47 @@ void Farsight::ReadObjects(Snapshot &snapshot, Napi::Env env)
 void Farsight::ReadChampions(ChampionSnapshot &snapshot, Napi::Env env)
 {
 }
-
+template<typename T>
+bool ReadMemory(HANDLE hProcess, uintptr_t address, T &value) {
+    return ReadProcessMemory(hProcess, reinterpret_cast<LPCVOID>(address), &value, sizeof(T), nullptr);
+}
 void Farsight::CreateSnapshot(Snapshot &snapshot, Napi::Env env)
 {
     Memory::Read(hProcess, baseAddress + Offsets::GameTime, &snapshot.gameTime, sizeof(float));
 
+    uintptr_t TimersBase2;
+    uintptr_t TimersBase;
+    
+    ReadMemory(hProcess, baseAddress +  0x19CC890, TimersBase);
+
+
+    ReadMemory(hProcess, TimersBase +  0x40, TimersBase2);
+
+    ReadMemory(hProcess, TimersBase2 +  0x28, TimersBase);
+
+    ReadMemory(hProcess, TimersBase +  0x30, TimersBase2);
+
+    ReadMemory(hProcess, TimersBase2 +  0x10, TimersBase);
+    
+    /////////////////
+    uintptr_t GubsBase;
+    uintptr_t HeraldBase;
+    uintptr_t BaronBase;
+    uintptr_t DrakeBase;
+    ReadMemory(hProcess, TimersBase +  0x330, GubsBase);
+    ReadMemory(hProcess, TimersBase +  0x30, HeraldBase);
+    ReadMemory(hProcess, TimersBase +  0x0, BaronBase);
+    ReadMemory(hProcess, TimersBase +  0x270, DrakeBase);
+
+
+    std::cout << TimersBase << std::endl; 
+    /////TIMERY
+    Memory::Read(hProcess, GubsBase + 0x20, &snapshot.grubsTime, sizeof(float));
+    Memory::Read(hProcess, HeraldBase + 0x20, &snapshot.heraldTime, sizeof(float));
+    Memory::Read(hProcess, BaronBase + 0x20, &snapshot.baronTime, sizeof(float));
+    Memory::Read(hProcess, DrakeBase + 0x20, &snapshot.drakeTime, sizeof(float));
+    /////
+    std::cout << snapshot.drakeTime << std::endl; 
     if (snapshot.gameTime <= 5.0f)
         return;
 
