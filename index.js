@@ -90,7 +90,7 @@ async function importOffsets() {
     }
 
     var response = await fetch(url);
-
+    console.log(url);
     if(!response.ok) {
         console.error("Could not fetch offsets from repository. Status: " + response.status);
         return;
