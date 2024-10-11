@@ -22,6 +22,10 @@ declare module "@floh22/farsight" {
     turrets: GameObject[];
     inhibitors: GameObject[];
     other: GameObject[];
+    grubsTime: number;
+    heraldTime: number;
+    baronTime: number; 
+    drakeTime: number; 
   }
 
 
@@ -51,6 +55,7 @@ declare module "@floh22/farsight" {
     objTotalGold: number;
     objDisplayName: number;
     objDisplayNameLength: number;
+    timersBase: number;
   }
 
   export function connectToLeague(): Promise<boolean>
