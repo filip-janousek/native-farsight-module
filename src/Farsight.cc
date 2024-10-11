@@ -352,7 +352,7 @@ void Farsight::CreateSnapshot(Snapshot &snapshot, Napi::Env env)
 
     ReadObjects(snapshot, env);
     ClearMissingObjects(snapshot);
-    
+    GetTimersAdress();
     GetTimersValue(snapshot);
 };
 
