@@ -13,7 +13,7 @@ var autoImportChampions = true;
 var autoImportOffsets = true;
 var gameVersion = [0,0];
 var offsetRepository = "https://api.github.com/repos/Loadscreengg/native-farsight-module/contents/offsets?ref=main";
-var localOffsets = require(`./offsets/offsets-14.19.1.json`);
+var localOffsets = require(`./offsets/offsets-14.20.1.json`);
 
 async function importChampionsFromCDragon() {
     if(championsSet) {

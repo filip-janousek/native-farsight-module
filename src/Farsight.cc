@@ -51,6 +51,10 @@ void Farsight::UnhookFromProcess()
     baseAddress = 0;
     size = 0;
     isSixtyFourBit = FALSE;
+    GubsBase = 0;
+    HeraldBase = 0;
+    BaronBase = 0;
+    DrakeBase = 0;
 }
 
 void Farsight::HookToProcess()
@@ -80,6 +84,7 @@ void Farsight::HookToProcess()
     if (EnumProcessModules(hProcess, hMods, sizeof(hMods), &cbNeeded))
     {
         baseAddress = (DWORD_PTR)hMods[0];
+           
     }
     else
     {
@@ -282,48 +287,73 @@ template<typename T>
 bool ReadMemory(HANDLE hProcess, uintptr_t address, T &value) {
     return ReadProcessMemory(hProcess, reinterpret_cast<LPCVOID>(address), &value, sizeof(T), nullptr);
 }
-void Farsight::CreateSnapshot(Snapshot &snapshot, Napi::Env env)
-{
-    Memory::Read(hProcess, baseAddress + Offsets::GameTime, &snapshot.gameTime, sizeof(float));
 
-    uintptr_t TimersBase2;
+void Farsight::GetTimersAdress(){
+    
+
     uintptr_t TimersBase;
  
     ReadMemory(hProcess, baseAddress +  Offsets::TimersBase, TimersBase);
 
 
-    ReadMemory(hProcess, TimersBase +  0x40, TimersBase2);
+    ReadMemory(hProcess, TimersBase +  0x40, TimersBase);
 
-    ReadMemory(hProcess, TimersBase2 +  0x28, TimersBase);
+    ReadMemory(hProcess, TimersBase +  0x28, TimersBase);
 
-    ReadMemory(hProcess, TimersBase +  0x30, TimersBase2);
+    ReadMemory(hProcess, TimersBase +  0x0, TimersBase);
 
-    ReadMemory(hProcess, TimersBase2 +  0x10, TimersBase);
+    ReadMemory(hProcess, TimersBase +  0x10, TimersBase);
+
+    ReadMemory(hProcess, TimersBase +  0x10, TimersBase);
+
+    ReadMemory(hProcess, TimersBase +  0x8, TimersBase);
+    
     
     /////////////////
-    uintptr_t GubsBase;
-    uintptr_t HeraldBase;
-    uintptr_t BaronBase;
-    uintptr_t DrakeBase;
-    ReadMemory(hProcess, TimersBase +  Offsets::TimerGrubs , GubsBase);
-    ReadMemory(hProcess, TimersBase +  Offsets::TimerHerlad, HeraldBase);
-    ReadMemory(hProcess, TimersBase +  Offsets::TimerBaron , BaronBase);
-    ReadMemory(hProcess, TimersBase +  Offsets::TimerDrake, DrakeBase);
+    //drake
+    ReadMemory(hProcess, TimersBase +  0x10, DrakeBase);
+    ReadMemory(hProcess, DrakeBase +  0x0, DrakeBase);
+    
+    /////////////////
+    //baron
+    ReadMemory(hProcess, TimersBase +  0x0, BaronBase);
+    ReadMemory(hProcess, BaronBase +  0x0, BaronBase);
+    
 
+    /////////////////
+    //grub
+    ReadMemory(hProcess, TimersBase +  0x10, GubsBase);
+    ReadMemory(hProcess, GubsBase +  0x0, GubsBase);
+    ReadMemory(hProcess, GubsBase +  0x0, GubsBase);
+    
 
-    std::cout << TimersBase << std::endl; 
-    /////TIMERY
-    Memory::Read(hProcess, GubsBase + 0x20, &snapshot.grubsTime, sizeof(float));
-    Memory::Read(hProcess, HeraldBase + 0x20, &snapshot.heraldTime, sizeof(float));
+    /////////////////
+    //herald HeraldBase
+    ReadMemory(hProcess, TimersBase +  0x10, HeraldBase);
+    ReadMemory(hProcess, HeraldBase +  0x10, HeraldBase);
+    ReadMemory(hProcess, HeraldBase +  0x0, HeraldBase);
+
+    //std::cout << "baron base: "<< BaronBase << std::endl;
+    
+
+}
+void Farsight::GetTimersValue(Snapshot &snapshot){
     Memory::Read(hProcess, BaronBase + 0x20, &snapshot.baronTime, sizeof(float));
     Memory::Read(hProcess, DrakeBase + 0x20, &snapshot.drakeTime, sizeof(float));
-    /////
-    std::cout << snapshot.drakeTime << std::endl; 
+    Memory::Read(hProcess, GubsBase + 0x20, &snapshot.grubsTime, sizeof(float));
+    Memory::Read(hProcess, HeraldBase + 0x20, &snapshot.heraldTime, sizeof(float));
+}
+void Farsight::CreateSnapshot(Snapshot &snapshot, Napi::Env env)
+{
+    Memory::Read(hProcess, baseAddress + Offsets::GameTime, &snapshot.gameTime, sizeof(float));
+
     if (snapshot.gameTime <= 5.0f)
         return;
 
     ReadObjects(snapshot, env);
     ClearMissingObjects(snapshot);
+    
+    GetTimersValue(snapshot);
 };
 
 void Farsight::CreateChampionSnapshot(ChampionSnapshot &championSnapshot, Napi::Env env)

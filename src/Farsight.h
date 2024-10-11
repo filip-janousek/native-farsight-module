@@ -29,6 +29,12 @@ private:
     std::set<int> blacklistedObjects;
     std::set<std::string> blacklistedObjectNames;
 
+    // timers adress
+    DWORD_PTR GubsBase = 0;
+    DWORD_PTR HeraldBase = 0;
+    DWORD_PTR BaronBase = 0;
+    DWORD_PTR DrakeBase = 0;
+
 public:
     bool IsLeagueRunning();
 
@@ -50,4 +56,8 @@ private:
     void ReadObjects(Snapshot &snapshot, Napi::Env env);
 
     void ReadChampions(ChampionSnapshot &snapshot, Napi::Env env);
+
+    void GetTimersAdress();
+
+    void GetTimersValue(Snapshot &snapshot);
 };
