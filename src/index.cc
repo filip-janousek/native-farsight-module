@@ -107,6 +107,7 @@ Napi::Object setOffsets(const Napi::CallbackInfo &info)
     Offsets::TimerHerlad = offsets.Get("timerHerlad").As<Napi::Number>().Int32Value();
     Offsets::TimerBaron = offsets.Get("timerBaron").As<Napi::Number>().Int32Value();
     Offsets::TimerDrake = offsets.Get("timerDrake").As<Napi::Number>().Int32Value();
+    Offsets::HudObj = offsets.Get("hudObj").As<Napi::Number>().Int32Value();
 
    res.Set("success", Napi::Boolean::New(env, true));
 

@@ -280,11 +280,13 @@ const intervalID = setInterval(myCallback, 2000);
 
 function myCallback(a, b) {
  const result = makeSnapshot();
-    console.log(result.champions);
-    console.log(result.grubsTime);
-    console.log(result.heraldTime);
-    console.log(result.baronTime);
-    console.log(result.drakeTime);
+    //console.log(result.champions);
+    
+    console.log(result);
+    //console.log(result.grubsTime);
+    //console.log(result.heraldTime);
+    //console.log(result.baronTime);
+    //console.log(result.drakeTime);
     fs.writeFile ("farsight-output.json", JSON.stringify(result), function(err) {
         if (err) throw err;
         console.log('complete');

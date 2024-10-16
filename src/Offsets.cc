@@ -38,3 +38,5 @@ int Offsets::TimerGrubs = 0x0;
 int Offsets::TimerHerlad = 0x0;
 int Offsets::TimerBaron = 0x0;
 int Offsets::TimerDrake = 0x0;
+
+int Offsets::HudObj = 0x0;

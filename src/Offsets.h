@@ -39,5 +39,5 @@ class Offsets {
         static int TimerHerlad;
         static int TimerBaron;
         static int TimerDrake;
-        
+        static int HudObj;
 };

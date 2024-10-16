@@ -337,6 +337,20 @@ void Farsight::GetTimersAdress(){
     
 
 }
+void Farsight::GetHUDObj(Snapshot &snapshot){
+    uintptr_t HudBase;
+    ReadMemory(hProcess, baseAddress +  Offsets::HudObj, HudBase);
+    
+    Memory::Read(hProcess, HudBase + 0x18 + 0x18, &snapshot.blueDrakes, sizeof(int));
+    Memory::Read(hProcess, HudBase + 0x18 + 0x8*0x6, &snapshot.blueBarons, sizeof(int));
+    Memory::Read(hProcess, HudBase + 0x18 + 0x8*0x7, &snapshot.blueGrubs, sizeof(int));
+
+    Memory::Read(hProcess, HudBase + 0x18 + 0x8*0x3 + 0x40, &snapshot.redDrakes, sizeof(int));
+    Memory::Read(hProcess, HudBase + 0x18 + 0x8*0x6 + 0x40, &snapshot.redBarons, sizeof(int));
+    Memory::Read(hProcess, HudBase + 0x18 + 0x8*0x7 + 0x40, &snapshot.redGrubs, sizeof(int));
+
+}
+
 void Farsight::GetTimersValue(Snapshot &snapshot){
     Memory::Read(hProcess, BaronBase + 0x20, &snapshot.baronTime, sizeof(float));
     Memory::Read(hProcess, DrakeBase + 0x20, &snapshot.drakeTime, sizeof(float));
@@ -354,6 +368,7 @@ void Farsight::CreateSnapshot(Snapshot &snapshot, Napi::Env env)
     ClearMissingObjects(snapshot);
     GetTimersAdress();
     GetTimersValue(snapshot);
+    GetHUDObj(snapshot);
 };
 
 void Farsight::CreateChampionSnapshot(ChampionSnapshot &championSnapshot, Napi::Env env)

@@ -25,7 +25,14 @@ declare module "@floh22/farsight" {
     grubsTime: number;
     heraldTime: number;
     baronTime: number; 
-    drakeTime: number; 
+    drakeTime: number;
+
+    blueDrakes: number;
+    blueBarons: number;
+    blueGrubs: number;
+    redDrakes: number;
+    redBarons: number;
+    redGrubs: number;
   }
 
 
@@ -56,6 +63,7 @@ declare module "@floh22/farsight" {
     objDisplayName: number;
     objDisplayNameLength: number;
     timersBase: number;
+    hudObj: number;
   }
 
   export function connectToLeague(): Promise<boolean>

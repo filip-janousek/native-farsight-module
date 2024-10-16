@@ -29,6 +29,14 @@ struct Snapshot
     float heraldTime = 0.f;
     float baronTime = 0.f;
     float drakeTime = 0.f;
+
+    int blueDrakes= 0;
+    int blueBarons= 0;
+    int blueGrubs= 0;
+
+    int redDrakes= 0;
+    int redBarons= 0;
+    int redGrubs= 0;
     ////////
 
     std::unique_ptr<ReadBenchmark> benchmark = std::unique_ptr<ReadBenchmark>(new ReadBenchmark());
@@ -79,6 +87,15 @@ struct Snapshot
         obj.Set("heraldTime", this->heraldTime);
         obj.Set("baronTime", this->baronTime);
         obj.Set("drakeTime", this->drakeTime);
+
+        obj.Set("blueDrakes", this->blueDrakes);
+        obj.Set("blueBarons", this->blueBarons);
+        obj.Set("blueGrubs", this->blueGrubs);
+
+        obj.Set("redDrakes", this->redDrakes);
+        obj.Set("redBarons", this->redBarons);
+        obj.Set("redGrubs", this->redGrubs);
+
 
         obj.Set("nextDragonType", Napi::String::New(env, this->nextDragonType));
         return obj;

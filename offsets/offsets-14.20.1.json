@@ -40,5 +40,7 @@
     "timerGrubs": "0x330",
     "timerHerlad": "0x30",
     "timerBaron": "0x0",
-    "timerDrake": "0x270"
+    "timerDrake": "0x270",
+
+    "hudObj": "0x19EDFA0"
 }

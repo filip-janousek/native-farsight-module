@@ -59,5 +59,7 @@ private:
 
     void GetTimersAdress();
 
+    void GetHUDObj(Snapshot &snapshot);
+
     void GetTimersValue(Snapshot &snapshot);
 };
