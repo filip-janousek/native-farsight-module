@@ -1,6 +1,6 @@
 {
-    "gameTime": "0x19FA750",
-    "localPlayer": "0x1A119E8",
+    "gameTime": "0x1A17C68",
+    "localPlayer": "0x1A300F0",
     "objIndex": "0x10",
     "objTeam": "0x3C",
     "objNetworkID": "0x10",
@@ -25,15 +25,15 @@
     "spellCooldown": "0x30",
     "spellCharges": "0x5C",
 
-    "objectManager": "0x19EDF48",
+    "objectManager": "0x1A0B458",
     "objectMapCount": "0x48",
     "objectMapRoot": "0x40",
     "objectMapNodeNetId": "0x20",
     "objectMapNodeObject": "0x28",
     
-    "heroList": "0x19EE068",
-    "minionList": "0x19F10C8",
-    "turretList": "0x19F81B8",
+    "heroList": "0x1A0B578",
+    "minionList": "0x1A0E548",
+    "turretList": "0x1A156C8",
     "inhibitorList": "0x19D6998",
     
     "timersBase": "0x19EE0B0",
@@ -42,5 +42,5 @@
     "timerBaron": "0x0",
     "timerDrake": "0x270",
 
-    "hudObj": "0x19EDFA0"
+    "hudObj": "0x1A0B4B0"
 }
